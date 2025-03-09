@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}UrbanMind - Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Location Input</h5>
+            </div>
+            <div class="card-body">
+                <form id="location-form" method="post">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="input_type" id="gps_radio" value="gps" checked>
+                            <label class="form-check-label" for="gps_radio">GPS Coordinates</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="input_type" id="erf_radio" value="erf">
+                            <label class="form-check-label" for="erf_radio">ERF Number</label>
+                        </div>
+                    </div>
+                    
+                    <div id="gps-inputs">
+                        <div class="mb-3">
+                            <label for="coordinates" class="form-label">GPS Coordinates</label>
+                            <input type="text" class="form-control" id="coordinates" name="coordinates" 
+                                   placeholder="e.g., -33.919578, 18.432544 or DMS format">
+                            <div class="form-text">Enter coordinates as decimal (e.g., -33.919578, 18.432544) or DMS format</div>
+                        </div>
+                    </div>
+                    
+                    <div id="erf-inputs" style="display: none;">
+                        <div class="mb-3">
+                            <label for="erf_number" class="form-label">ERF Number</label>
+                            <input type="text" class="form-control" id="erf_number" name="erf_number" 
+                                   placeholder="e.g., 12345">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Get Insights</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Map View</h5>
+                <div id="map-controls" class="mt-2">
+                    <!-- Map controls will be added by Leaflet -->
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="map" style="height: 400px; width: 100%;" class="border rounded"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card" id="insights-card" style="display: none;">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Zoning Insights</h5>
+            </div>
+            <div class="card-body" id="insights-content">
+                <!-- Insights will be loaded here -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}
