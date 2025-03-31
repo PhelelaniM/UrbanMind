@@ -4,6 +4,8 @@ let marker = null;
 const defaultCenter = [-33.9249, 18.4241]; // Cape Town, South Africa
 let baseMaps = {};
 let currentBaseMap = null;
+let zoningLayer = null;
+let zoningData = null;
 
 // Initialize the map with default center
 function initializeMap() {
@@ -18,16 +20,27 @@ function initializeMap() {
             maxZoom: 19
         });
         
-        // Add the satellite hybrid layer
+        // Add the satellite layer
         const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
             maxZoom: 19
         });
         
+        // Add the hybrid satellite layer
+        const hybridLayer = L.layerGroup([
+            satelliteLayer,
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri',
+                maxZoom: 19,
+                pane: 'overlayPane'
+            })
+        ]);
+        
         // Define base maps for layer control
         baseMaps = {
             "OpenStreetMap": osmLayer,
-            "Satellite": satelliteLayer
+            "Satellite": satelliteLayer,
+            "Hybrid": hybridLayer
         };
         
         // Add the default layer to the map
@@ -55,7 +68,124 @@ function initializeMap() {
             // Update marker
             updateMapMarker([lat, lng]);
         });
+        
+        // Load and display the zoning GeoJSON data
+        loadZoningData();
     }
+}
+
+// Load the zoning GeoJSON data
+function loadZoningData() {
+    fetch('/static/data/coct_zoning_sample.geojson')
+        .then(response => response.json())
+        .then(data => {
+            zoningData = data;
+            displayZoningLayer();
+        })
+        .catch(error => {
+            console.error('Error loading zoning data:', error);
+        });
+}
+
+// Display the zoning layer on the map
+function displayZoningLayer() {
+    if (zoningLayer) {
+        map.removeLayer(zoningLayer);
+    }
+    
+    zoningLayer = L.geoJSON(zoningData, {
+        style: function(feature) {
+            // Style based on zoning type
+            const zoneCode = feature.properties.INT_ZONE_CODE;
+            return getZoneStyle(zoneCode);
+        },
+        onEachFeature: function(feature, layer) {
+            // Add popup with zoning information
+            const props = feature.properties;
+            const popupContent = `
+                <strong>ERF: ${props.SL_LAND_PRCL_KEY}</strong><br>
+                <strong>Zone: ${props.INT_ZONE_CODE}</strong><br>
+                ${props.INT_ZONE_DESC}<br>
+                SG Code: ${props.SG26_CODE}
+            `;
+            layer.bindPopup(popupContent);
+        }
+    }).addTo(map);
+}
+
+// Get style for different zone types
+function getZoneStyle(zoneCode) {
+    // Define colors for different zone types
+    const zoneColors = {
+        'SR1': '#ffff00', // Single Residential - Yellow
+        'GR2': '#ff9900', // General Residential - Orange
+        'TR2': '#cccccc', // Transport - Gray
+        'OS3': '#33cc33', // Open Space - Green
+        // Add more zone types as needed
+    };
+    
+    // Default style
+    const style = {
+        fillColor: '#3388ff',
+        weight: 1,
+        opacity: 1,
+        color: '#666666',
+        fillOpacity: 0.5
+    };
+    
+    // Set color based on zone code if available
+    if (zoneCode && zoneColors[zoneCode]) {
+        style.fillColor = zoneColors[zoneCode];
+    }
+    
+    return style;
+}
+
+// Find ERF by SL_LAND_PRCL_KEY
+function findErfByKey(erfNumber) {
+    if (!zoningData || !zoningData.features) {
+        console.error('Zoning data not loaded yet');
+        return null;
+    }
+    
+    // Convert to number for comparison
+    const erfKey = parseInt(erfNumber);
+    
+    // Find the feature with matching SL_LAND_PRCL_KEY
+    const feature = zoningData.features.find(f => 
+        f.properties.SL_LAND_PRCL_KEY === erfKey
+    );
+    
+    return feature;
+}
+
+// Zoom to ERF
+function zoomToErf(erfNumber) {
+    const feature = findErfByKey(erfNumber);
+    
+    if (feature) {
+        // Create a GeoJSON layer just for this feature
+        const erfLayer = L.geoJSON(feature);
+        
+        // Zoom to the bounds of the feature
+        map.fitBounds(erfLayer.getBounds());
+        
+        // Get the center of the feature for the marker
+        const bounds = erfLayer.getBounds();
+        const center = bounds.getCenter();
+        
+        // Update marker
+        updateMapMarker([center.lat, center.lng]);
+        
+        // Return the center coordinates
+        return {
+            lat: center.lat,
+            lng: center.lng,
+            feature: feature
+        };
+    }
+    
+    return null;
 }
 
 // Fix Leaflet's default icon issues

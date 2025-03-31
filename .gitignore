@@ -43,3 +43,15 @@ Thumbs.db
 
 # Environment variables
 .env
+
+# GeoJSON files
+*.geojson
+
+# Credentials
+credentials.json
+*_credentials.*
+*_key.*
+*_secret.*
+*_token.*
+config.ini
+secrets.yaml

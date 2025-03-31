@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Get form data
         const inputType = document.querySelector('input[name="input_type"]:checked').value;
-        let requestData = {};
         
         if (inputType === 'gps') {
             const coordinates = document.getElementById('coordinates').value.trim();
@@ -48,9 +47,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            requestData = { coordinates };
-            
-            // Don't update map marker here, it will be updated when we get the response
+            // Send request to server
+            fetch('/get_insights', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ coordinates })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update map marker with returned location
+                    if (data.location) {
+                        updateMapMarker([data.location.lat, data.location.lng]);
+                    }
+                    
+                    // Display insights
+                    displayInsights(data);
+                } else {
+                    showError(data.error || 'An error occurred while fetching insights.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('An error occurred while fetching insights.');
+            });
         } else {
             const erfNumber = document.getElementById('erf_number').value.trim();
             
@@ -60,36 +82,64 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            requestData = { erf: erfNumber };
-        }
-        
-        // Send request to server
-        fetch('/get_insights', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Update map marker with returned location
-                if (data.location) {
-                    updateMapMarker([data.location.lat, data.location.lng]);
-                }
+            // Search for ERF in the GeoJSON data
+            const erfResult = zoomToErf(erfNumber);
+            
+            if (erfResult) {
+                // Get zoning information from the feature
+                const feature = erfResult.feature;
+                const zoneType = feature.properties.INT_ZONE_CODE.toLowerCase();
+                const zoneDesc = feature.properties.INT_ZONE_DESC;
+                
+                // Create a data object similar to what the server would return
+                const data = {
+                    success: true,
+                    location: {
+                        lat: erfResult.lat,
+                        lng: erfResult.lng
+                    },
+                    erf_number: erfNumber,
+                    zoning_type: zoneType,
+                    zoning_info: {
+                        description: zoneDesc,
+                        permitted_uses: getPermittedUsesForZone(zoneType),
+                        restrictions: getRestrictionsForZone(zoneType)
+                    }
+                };
                 
                 // Display insights
                 displayInsights(data);
             } else {
-                showError(data.error || 'An error occurred while fetching insights.');
+                showError(`ERF number ${erfNumber} not found in the zoning data.`);
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showError('An error occurred while fetching insights.');
-        });
+        }
     });
+    
+    // Helper function to get permitted uses for a zone type
+    function getPermittedUsesForZone(zoneType) {
+        // This is a simplified version - in a real app, this would come from a database
+        const zoneUses = {
+            'sr1': ["Single-family homes", "Home occupation (with restrictions)", "Second dwelling (with restrictions)"],
+            'gr2': ["Multi-family dwellings", "Townhouses", "Flats", "Residential buildings"],
+            'tr2': ["Public roads", "Public parking", "Transport facilities"],
+            'os3': ["Special open space", "Environmental conservation", "Cultural and historical sites"]
+        };
+        
+        return zoneUses[zoneType] || ["Information not available"];
+    }
+    
+    // Helper function to get restrictions for a zone type
+    function getRestrictionsForZone(zoneType) {
+        // This is a simplified version - in a real app, this would come from a database
+        const zoneRestrictions = {
+            'sr1': ["Height limit: 2-3 stories", "Setback: 3-5m from street", "Coverage: 60% max"],
+            'gr2': ["Height limit: 4-5 stories", "Setback: 4.5m from street", "Coverage: 60% max"],
+            'tr2': ["Special restrictions apply", "Contact municipality for details"],
+            'os3': ["Development restrictions apply", "Environmental impact assessment required", "Heritage approval may be required"]
+        };
+        
+        return zoneRestrictions[zoneType] || ["Information not available"];
+    }
     
     // Display error message
     function showError(message) {

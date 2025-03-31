@@ -1,0 +1,2 @@
+# Run UrbanMind auto git sync script daily at 11:30 PM
+30 23 * * * /Users/Mkhize/Downloads/urban-planning-flask-app/auto_git_sync.sh >> /Users/Mkhize/Downloads/urban-planning-flask-app/git_sync.log 2>&1
