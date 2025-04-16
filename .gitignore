@@ -44,8 +44,8 @@ Thumbs.db
 # Environment variables
 .env
 
-# GeoJSON files
-*.geojson
+# # GeoJSON files
+# *.geojson
 
 # Credentials
 credentials.json
