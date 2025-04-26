@@ -15,4 +15,4 @@ class LocationForm(FlaskForm):
                             validators=[Optional()],
                             render_kw={"placeholder": "e.g., 12345"})
     
-    submit = SubmitField('Get Insights')
+    submit = SubmitField('Get Information')

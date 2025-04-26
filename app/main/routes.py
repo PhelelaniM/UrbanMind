@@ -84,8 +84,8 @@ def index():
     form = LocationForm()
     return render_template('index.html', form=form)
 
-@bp.route('/get_insights', methods=['POST'])
-def get_insights():
+@bp.route('/get_information', methods=['POST'])
+def get_information():
     if request.method == 'POST':
         data = request.json
         

@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputTypeRadios = document.querySelectorAll('input[name="input_type"]');
     const gpsInputs = document.getElementById('gps-inputs');
     const erfInputs = document.getElementById('erf-inputs');
-    const insightsCard = document.getElementById('insights-card');
-    const insightsContent = document.getElementById('insights-content');
+    const informationCard = document.getElementById('information-card');
+    const informationContent = document.getElementById('information-content');
+    const informationLocationBadge = document.getElementById('information-location-badge');
     
     // Toggle input fields based on selected input type
     function toggleInputFields() {
@@ -32,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         
         // Show loading state
-        insightsContent.innerHTML = '<div class="loader"></div>';
-        insightsCard.style.display = 'block';
+        informationContent.innerHTML = '<div class="loader"></div><p class="text-center text-muted">Generating information...</p>';
+        informationCard.style.display = 'block';
         
         // Get form data
         const inputType = document.querySelector('input[name="input_type"]:checked').value;
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Send request to server
-            fetch('/get_insights', {
+            fetch('/get_information', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,15 +64,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         updateMapMarker([data.location.lat, data.location.lng]);
                     }
                     
-                    // Display insights
-                    displayInsights(data);
+                    // Display information
+                    displayInformation(data);
                 } else {
-                    showError(data.error || 'An error occurred while fetching insights.');
+                    showError(data.error || 'An error occurred while fetching information.');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                showError('An error occurred while fetching insights.');
+                showError('An error occurred while fetching information.');
             });
         } else {
             const erfNumber = document.getElementById('erf_number').value.trim();
@@ -107,8 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 };
                 
-                // Display insights
-                displayInsights(data);
+                // Display information
+                displayInformation(data);
             } else {
                 showError(`ERF number ${erfNumber} not found in the zoning data.`);
             }
@@ -143,51 +144,95 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Display error message
     function showError(message) {
-        insightsContent.innerHTML = `
+        informationContent.innerHTML = `
             <div class="alert alert-danger" role="alert">
                 ${message}
             </div>
         `;
+        informationLocationBadge.textContent = '';
     }
     
-    // Display zoning insights
-    function displayInsights(data) {
+    // Display zoning information
+    function displayInformation(data) {
         const zoningType = data.zoning_type;
         const zoningInfo = data.zoning_info;
         
-        let locationInfo = '';
+        // Update location badge
         if (data.erf_number) {
-            locationInfo = `<p><strong>ERF Number:</strong> ${data.erf_number}</p>`;
-        }
-        locationInfo += `<p><strong>Coordinates:</strong> ${data.location.lat.toFixed(6)}, ${data.location.lng.toFixed(6)}</p>`;
-        
-        let permittedUsesList = '';
-        if (zoningInfo.permitted_uses && zoningInfo.permitted_uses.length > 0) {
-            permittedUsesList = '<ul class="zoning-info-list">' + 
-                zoningInfo.permitted_uses.map(use => `<li>${use}</li>`).join('') + 
-                '</ul>';
+            informationLocationBadge.textContent = `ERF: ${data.erf_number}`;
+        } else {
+            informationLocationBadge.textContent = `GPS Location`;
         }
         
-        let restrictionsList = '';
-        if (zoningInfo.restrictions && zoningInfo.restrictions.length > 0) {
-            restrictionsList = '<ul class="zoning-info-list">' + 
-                zoningInfo.restrictions.map(restriction => `<li>${restriction}</li>`).join('') + 
-                '</ul>';
-        }
+        // Create a more modern layout for information
+        let html = `<div class="grid row">`;
         
-        insightsContent.innerHTML = `
+        // Left column
+        html += `<div class="col-md-6">`;
+        
+        // Zoning type and location info
+        html += `
             <div class="zoning-${zoningType}">
                 <h4 class="mb-3">Zoning Type: ${formatZoningType(zoningType)}</h4>
-                ${locationInfo}
                 <p>${zoningInfo.description || ''}</p>
-                
-                <h5 class="mt-4">Permitted Uses</h5>
-                ${permittedUsesList}
-                
-                <h5 class="mt-4">Restrictions</h5>
-                ${restrictionsList}
             </div>
         `;
+        
+        if (data.erf_number) {
+            html += `<p><strong>ERF Number:</strong> ${data.erf_number}</p>`;
+        }
+        html += `<p><strong>Coordinates:</strong> ${data.location.lat.toFixed(6)}, ${data.location.lng.toFixed(6)}</p>`;
+        
+        // Permitted uses
+        html += `<h5 class="mt-4">Permitted Uses</h5>`;
+        if (zoningInfo.permitted_uses && zoningInfo.permitted_uses.length > 0) {
+            html += '<ul class="list-disc">';
+            zoningInfo.permitted_uses.forEach(use => {
+                html += `<li>${use}</li>`;
+            });
+            html += '</ul>';
+        } else {
+            html += '<p>No information available</p>';
+        }
+        
+        html += `</div>`;
+        
+        // Right column
+        html += `<div class="col-md-6">`;
+        
+        // Recommended zoning (mock)
+        html += `
+            <div class="alert alert-info mb-4">
+                <h5 class="mb-2">Recommended Zoning</h5>
+                <p class="mb-0">${formatZoningType(zoningType)}</p>
+            </div>
+        `;
+        
+        // Restrictions
+        html += `<h5 class="mt-4">Restrictions</h5>`;
+        if (zoningInfo.restrictions && zoningInfo.restrictions.length > 0) {
+            html += '<ul class="list-disc">';
+            zoningInfo.restrictions.forEach(restriction => {
+                html += `<li>${restriction}</li>`;
+            });
+            html += '</ul>';
+        } else {
+            html += '<p>No information available</p>';
+        }
+        
+        html += `
+            <div class="mt-4 text-end">
+                <small class="text-muted">Last updated: ${new Date().toLocaleDateString()}</small>
+            </div>
+        `;
+        
+        html += `</div>`;
+        html += `</div>`;
+        
+        informationContent.innerHTML = html;
+        
+        // Smooth scroll to information
+        informationCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     
     // Format zoning type for display

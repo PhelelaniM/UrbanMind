@@ -3,17 +3,18 @@
 {% block title %}UrbanMind - Home{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-6">
-        <div class="card mb-4">
+<div class="row g-0">
+    <div class="col-md-5">
+        <div class="card border-0 rounded-start rounded-0">
             <div class="card-header">
-                <h5 class="card-title mb-0">Location Input</h5>
+                <h5 class="card-title">Location Input</h5>
+                <p class="text-muted">Enter GPS coordinates or an ERF number to analyze land use possibilities</p>
             </div>
             <div class="card-body">
                 <form id="location-form" method="post">
                     {{ form.hidden_tag() }}
                     
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="input_type" id="gps_radio" value="gps" checked>
                             <label class="form-check-label" for="gps_radio">GPS Coordinates</label>
@@ -41,35 +42,40 @@
                         </div>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Get Insights</button>
+                    <button type="submit" class="btn btn-primary w-100 mt-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                        Erf / Property Information
+                    </button>
                 </form>
             </div>
         </div>
     </div>
     
-    <div class="col-md-6">
-        <div class="card mb-4">
+    <div class="col-md-7">
+        <div class="card border-0 rounded-end rounded-0 h-100">
             <div class="card-header">
-                <h5 class="card-title mb-0">Map View</h5>
-                <div id="map-controls" class="mt-2">
-                    <!-- Map controls will be added by Leaflet -->
-                </div>
+                <h5 class="card-title">Location Map</h5>
+                <p class="text-muted">View the selected location on the map</p>
             </div>
-            <div class="card-body">
-                <div id="map" style="height: 400px; width: 100%;" class="border rounded"></div>
+            <div class="card-body p-0">
+                <div id="map"></div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
+<div class="row mt-4">
     <div class="col-12">
-        <div class="card" id="insights-card" style="display: none;">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Zoning Insights</h5>
+        <div class="card information-card" id="information-card" style="display: none;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Zoning Information</h5>
+                <span class="badge" id="information-location-badge"></span>
             </div>
-            <div class="card-body" id="insights-content">
-                <!-- Insights will be loaded here -->
+            <div class="card-body" id="information-content">
+                <!-- Information will be loaded here -->
             </div>
         </div>
     </div>

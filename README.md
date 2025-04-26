@@ -95,9 +95,9 @@ UrbanMind/
 1. Open the application in your browser
 2. Choose input type (GPS Coordinates or ERF Number)
 3. Enter the required information
-4. Click "Get Insights" to view zoning information
+4. Click "Get Information" to view zoning information
 5. The map will update to show the selected location
-6. Zoning insights will be displayed below the map
+6. Zoning information will be displayed below the map
 
 ## Mock Data
 
