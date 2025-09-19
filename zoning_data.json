@@ -1,0 +1,682 @@
+{
+  "SR1": {
+    "description": "Single Residential 1 – Conventional Housing",
+    "permitted_uses": [
+      "Dwelling house",
+      "Private road", 
+      "Home occupation (subject to conditions)",
+      "Bed & Breakfast",
+      "Second/third dwelling",
+      "Home child care (subject to conditions)"
+    ],
+    "consent_uses": [
+      "Utility service",
+      "Place of instruction",
+      "Place of worship", 
+      "House shop",
+      "Institution",
+      "Guest house",
+      "Rooftop telecom (minor/rooftop)",
+      "Wind turbine infrastructure",
+      "Open space",
+      "Urban agriculture",
+      "Veterinary practice",
+      "Halfway house"
+    ],
+    "restrictions": [
+      "See 'Table of floor factor, floor space, coverage, height and building lines' for SR1 (Item 22)"
+    ],
+    "recommended_actions": [
+      "When advising owners, confirm if additional use rights (e.g., second/third dwelling) trigger parking/building line changes under Item 22",
+      "Check outdoor signage constraints for house shops"
+    ]
+  },
+  "SR2": {
+    "description": "Single Residential 2 – Incremental Housing",
+    "permitted_uses": [
+      "Dwelling house",
+      "Second dwelling",
+      "Utility service",
+      "Private road",
+      "Urban agriculture",
+      "Open space",
+      "Shelter",
+      "House shop",
+      "Home occupation",
+      "Bed & Breakfast",
+      "Home child care",
+      "Informal trading",
+      "Third dwelling + community/business purposes (no alcohol)"
+    ],
+    "consent_uses": [
+      "Group housing",
+      "Boarding house",
+      "Place of worship/instruction/assembly",
+      "Institution/clinic",
+      "Office",
+      "Restaurant",
+      "Guest house",
+      "Place of entertainment",
+      "Service trade",
+      "Authority use",
+      "Rooftop telecom",
+      "Wind turbine infrastructure",
+      "Veterinary practice",
+      "Halfway house"
+    ],
+    "restrictions": [
+      "Development rules referenced to Items 23–30",
+      "Flexible to enable upgrading",
+      "City can require cessation/conditions if nuisance"
+    ],
+    "recommended_actions": [
+      "For upgrading areas, ensure activity does not become noxious",
+      "Check which SR1 rules are cross‑referenced (e.g., garages, parking)"
+    ]
+  },
+  "GR2": {
+    "description": "General Residential 2",
+    "permitted_uses": [
+      "Dwelling house",
+      "Second dwelling", 
+      "Group housing",
+      "Boarding/guest house",
+      "Flats",
+      "Private road",
+      "Open space (subject to para (c))"
+    ],
+    "consent_uses": [
+      "See item 40 and following for consent uses (varies by subzoning)"
+    ],
+    "restrictions": [
+      "Vehicle access must be from a road reserve ≥9 m wide (Item 45A)",
+      "Other limits vary by subzoning (height/floor factor)"
+    ],
+    "recommended_actions": [
+      "Check the specific GR subzoning table for height/floor factor before permitting flats",
+      "Confirm road width compliance early in site checks"
+    ]
+  },
+  "CO1": {
+    "description": "Community 1 – Local",
+    "permitted_uses": [
+      "Place of instruction",
+      "Place of worship",
+      "Clinic",
+      "Rooftop/minor telecom",
+      "Filming",
+      "Open space"
+    ],
+    "consent_uses": [
+      "Institution",
+      "Hospital",
+      "Place of assembly",
+      "Cemetery",
+      "Freestanding telecom",
+      "Veterinary practice",
+      "Urban agriculture"
+    ],
+    "restrictions": [
+      "FF ≤0.8",
+      "Coverage ≤60%",
+      "Height ≤12 m to top of roof (no limit for bell tower/steeple etc.)",
+      "Street/common building lines 5 m",
+      "Parking/loading/screening/noise mitigation as per items"
+    ],
+    "recommended_actions": [
+      "For churches/schools, test traffic + parking early",
+      "Where tall features proposed (minaret/steeple) verify structural + visual impact"
+    ]
+  },
+  "CO2": {
+    "description": "Community 2 – Regional",
+    "permitted_uses": [
+      "Institution",
+      "Hospital",
+      "Place of instruction",
+      "Place of worship",
+      "Place of assembly",
+      "Rooftop/minor telecom",
+      "Filming",
+      "Open space"
+    ],
+    "consent_uses": [
+      "Boarding house",
+      "Conference facility",
+      "Cemetery/crematorium/funeral parlour",
+      "Freestanding telecom",
+      "Wind turbine infrastructure",
+      "Veterinary practice",
+      "Urban agriculture"
+    ],
+    "restrictions": [
+      "FF ≤2.0",
+      "Coverage ≤60%",
+      "Height ≤18 m to top of roof (no limit for bell tower/steeple etc.)",
+      "Street/common building lines 5 m",
+      "Parking/loading/screening/noise mitigation as per items"
+    ],
+    "recommended_actions": [
+      "For hospitals/campuses, require traffic impact + noise mitigation",
+      "Confirm emergency vehicle access widths"
+    ]
+  },
+  "LB1": {
+    "description": "Local Business 1 – Intermediate Business",
+    "permitted_uses": [
+      "Office",
+      "Dwelling house",
+      "Boarding house",
+      "Utility service",
+      "Flats (truncated list – see Item 50)"
+    ],
+    "consent_uses": [
+      "Consent uses per Item 50 (interface controls)"
+    ],
+    "restrictions": [
+      "Acts as buffer between business and residential",
+      "Check LB1 table for FF/coverage/height"
+    ],
+    "recommended_actions": [
+      "Ensure façade/operational impacts on adjoining SR/GR areas are mitigated (screening, trading hours)"
+    ]
+  },
+  "LB2": {
+    "description": "Local Business 2 – Local Business",
+    "permitted_uses": [
+      "Shop",
+      "Office",
+      "Dwelling/second dwelling",
+      "Boarding house",
+      "Bed & Breakfast",
+      "Flats",
+      "Place of instruction/worship",
+      "Institution/clinic",
+      "Guest house",
+      "Service trade",
+      "Utility service",
+      "Rooftop telecom",
+      "Private road",
+      "Veterinary practice",
+      "Open space"
+    ],
+    "consent_uses": [
+      "Place of assembly",
+      "Informal trading",
+      "Restaurant",
+      "Alcohol sales",
+      "Place of entertainment",
+      "Adult shop",
+      "Business premises",
+      "Supermarket",
+      "Plant nursery",
+      "Hotel",
+      "Conference facility",
+      "Motor repair garage",
+      "Service station",
+      "Authority use",
+      "Freestanding telecom",
+      "Wind turbine infrastructure",
+      "Transport use",
+      "Multiple parking garage"
+    ],
+    "restrictions": [
+      "FF ≤1.0",
+      "Coverage ≤75%",
+      "Height ≤15 m to top of roof",
+      "Various street/common BLs",
+      "Parking/loading/screening",
+      "Wind mitigation possible"
+    ],
+    "recommended_actions": [
+      "On corner or pedestrian‑heavy sites, consider providing 3 m public footway to unlock floor‑space bonus",
+      "Manage noise & late‑night activity"
+    ]
+  },
+  "GB1": {
+    "description": "General Business 1",
+    "permitted_uses": [
+      "Business premises",
+      "Dwelling/second dwelling",
+      "Boarding house",
+      "Flats",
+      "Place of instruction/worship",
+      "Institution/hospital",
+      "Place of assembly/entertainment",
+      "Hotel",
+      "Conference facility",
+      "Service trade",
+      "Authority use",
+      "Utility service",
+      "Rooftop telecom",
+      "Multiple parking garage",
+      "Private road",
+      "Filming",
+      "Veterinary practice",
+      "Open space"
+    ],
+    "consent_uses": [
+      "Adult shop/entertainment/services",
+      "Informal trading",
+      "Expo centre",
+      "Motor repair garage",
+      "Warehouse",
+      "Freestanding telecom",
+      "Wind turbine infrastructure",
+      "Transport use",
+      "Helicopter pad",
+      "Service station"
+    ],
+    "restrictions": [
+      "Coverage 100%",
+      "Street centreline setback 8 m if required",
+      "FF/Height: 15m/1.5",
+      "Plus BL/parking/loading/screening/wind mitigation provisions"
+    ],
+    "recommended_actions": [
+      "In TOD nodes, prioritise active ground floor frontages",
+      "Check wind studies for tall proposals"
+    ]
+  },
+  "MU2": {
+    "description": "Mixed Use 2",
+    "permitted_uses": [
+      "Business premises",
+      "Industry",
+      "Dwelling/second dwelling",
+      "Boarding house",
+      "Flats",
+      "Place of instruction/worship",
+      "Institution/hospital",
+      "Place of assembly/entertainment",
+      "Hotel",
+      "Conference facility",
+      "Authority/utility",
+      "Rooftop telecom",
+      "Transport use",
+      "Multiple parking",
+      "Private road",
+      "Filming",
+      "Open space"
+    ],
+    "consent_uses": [
+      "Adult shop/entertainment/services",
+      "Informal trading",
+      "Expo centre",
+      "Scrap yard",
+      "Freestanding telecom",
+      "Wind turbine infrastructure",
+      "Helicopter pad",
+      "Service station",
+      "Recycling centre",
+      "Veterinary practice",
+      "Motor repair garage"
+    ],
+    "restrictions": [
+      "FF/Coverage/Height: 4.0/100%/25 m",
+      "Plus street centreline setback 8 m if required",
+      "BL table incl. MU3 stepped above 25 m",
+      "Parking/loading/screening/wind mitigation"
+    ],
+    "recommended_actions": [
+      "Use MU as buffer between GB and GI",
+      "Check noise/traffic impacts for industrial components near residential",
+      "Apply BL table for tall MU3 forms"
+    ]
+  },
+  "GI1": {
+    "description": "General Industry 1",
+    "permitted_uses": [
+      "Industry",
+      "Restaurant",
+      "Service station",
+      "Motor repair garage",
+      "Funeral parlour",
+      "Scrap yard",
+      "Authority/utility",
+      "Crematorium",
+      "Telecom (rooftop/freestanding)",
+      "Transport use",
+      "Multiple parking",
+      "Agricultural industry",
+      "Private road",
+      "Open space",
+      "Filming",
+      "Veterinary practice",
+      "Factory shop",
+      "Adult shop"
+    ],
+    "consent_uses": [
+      "Abattoir",
+      "Place of worship/institution/clinic/assembly",
+      "Adult entertainment/services",
+      "Aquaculture",
+      "Informal trading",
+      "Shop",
+      "Office",
+      "Alcohol sales",
+      "Place of entertainment",
+      "Helicopter pad",
+      "Wind turbine infrastructure",
+      "Container site"
+    ],
+    "restrictions": [
+      "FF/Coverage: 1.5/75%",
+      "Height ≤18 m",
+      "BL street 5 m; common 3 m",
+      "Container stacks ≤15 m",
+      "Parking/loading/screening",
+      "Risk mgmt plan for hazardous substances"
+    ],
+    "recommended_actions": [
+      "For factory shops, cap sales floor to ≤10% of total building area",
+      "Require risk plan when hazardous substances stored",
+      "Screen industrial interfaces"
+    ]
+  },
+  "RI": {
+    "description": "Risk Industry",
+    "permitted_uses": [
+      "Noxious trade",
+      "Risk activity",
+      "Crematorium",
+      "Telecom (rooftop/freestanding)",
+      "Private road",
+      "Open space",
+      "Filming",
+      "Factory shop"
+    ],
+    "consent_uses": [
+      "Shop",
+      "Restaurant",
+      "Informal trading",
+      "Service station",
+      "Motor repair garage",
+      "Industry",
+      "Scrap yard",
+      "Abattoir",
+      "Authority/utility",
+      "Wind turbine infrastructure",
+      "Helicopter pad",
+      "Container site",
+      "Transport use",
+      "Recycling centre",
+      "Multiple parking garage"
+    ],
+    "restrictions": [
+      "FF ≤2.0",
+      "Coverage ≤75%",
+      "Height: no limit for noxious/risk/manufacturing; others ≤18 m",
+      "Additional hazardous-substance controls apply"
+    ],
+    "recommended_actions": [
+      "Require risk assessment, buffer/interface management, and signage/odour/noise controls",
+      "Consult environmental health early"
+    ]
+  },
+  "UT": {
+    "description": "Utility",
+    "permitted_uses": [
+      "Utility service",
+      "Authority use",
+      "Telecom (rooftop/freestanding/minor)"
+    ],
+    "consent_uses": [
+      "Cemetery",
+      "Informal trading",
+      "Funeral parlour",
+      "Crematorium",
+      "Urban agriculture",
+      "Airport",
+      "Wind turbine infrastructure",
+      "Helicopter pad"
+    ],
+    "restrictions": [
+      "Site development plan (SDP) required for consent uses",
+      "SDP may be required even for primary uses",
+      "Approved SDP constitutes dev rules"
+    ],
+    "recommended_actions": [
+      "Confirm servitudes and safety setbacks (e.g., substations, reservoirs)",
+      "Require SDP with services & access plan"
+    ]
+  },
+  "TR1": {
+    "description": "Transport 1 – Transport Use",
+    "permitted_uses": [
+      "Transport use",
+      "Multiple parking garage",
+      "Utility service",
+      "Shop",
+      "Restaurant",
+      "Service trade",
+      "Office",
+      "Warehouse",
+      "Telecom (rooftop/minor)",
+      "Container site"
+    ],
+    "consent_uses": [
+      "Business premises",
+      "Flats",
+      "Assembly/entertainment",
+      "Hotel",
+      "Conference",
+      "Service station",
+      "Motor repair",
+      "Freestanding telecom",
+      "Wind turbine infrastructure",
+      "Airport",
+      "Helicopter pad",
+      "Informal trading",
+      "Industry",
+      "Air/underground rights (with conditions)"
+    ],
+    "restrictions": [
+      "FF ≤2.0",
+      "Coverage ≤75%",
+      "Other dev rules per items 83–86"
+    ],
+    "recommended_actions": [
+      "Confirm that consent uses don't compromise transport use",
+      "Require SDP and possibly rezoning if permanent change from transport focus"
+    ]
+  },
+  "TR2": {
+    "description": "Transport 2 – Public road & public parking",
+    "permitted_uses": [
+      "Public street/road",
+      "Minor telecom",
+      "Utility service"
+    ],
+    "consent_uses": [
+      "Informal trading",
+      "Multiple parking garage",
+      "Wind turbine infrastructure",
+      "Air & underground rights"
+    ],
+    "restrictions": [
+      "SDP required for consent uses",
+      "Construction in public streets requires City approval",
+      "Air/underground rights require servitude & agreement"
+    ],
+    "recommended_actions": [
+      "Coordinate with Roads authority",
+      "Demarcate informal trading sites via City by-law",
+      "Manage corner sightlines and pedestrian safety"
+    ]
+  },
+  "NP": {
+    "description": "National Port",
+    "permitted_uses": [
+      "As per approved Port Development Framework Plan (National Ports Act)"
+    ],
+    "consent_uses": [
+      "As per the approved plan"
+    ],
+    "restrictions": [
+      "Development rules are those in the approved plan"
+    ],
+    "recommended_actions": [
+      "Engage Transnet National Ports Authority",
+      "Obtain and reference the specific Port plan for site"
+    ]
+  },
+  "OS1": {
+    "description": "Open Space 1 – Environmental conservation",
+    "permitted_uses": [
+      "Environmental conservation use",
+      "Minor telecom (rooftop/freestanding)"
+    ],
+    "consent_uses": [
+      "Harvesting of natural resources",
+      "Environmental facilities",
+      "Tourist accommodation/facilities",
+      "Utility service",
+      "Telecom (rooftop/freestanding)",
+      "Wind turbine infrastructure",
+      "Cultural/social ceremonies"
+    ],
+    "restrictions": [
+      "SDP may be required even for primary uses",
+      "Required for consent uses",
+      "Approved SDP constitutes dev rules"
+    ],
+    "recommended_actions": [
+      "Ensure conservation objectives not compromised",
+      "Require EIA/scientific input",
+      "Restrict access/lighting/structures to low impact"
+    ]
+  },
+  "OS2": {
+    "description": "Open Space 2 – Public open space",
+    "permitted_uses": [
+      "Open space",
+      "Private road",
+      "Utility service",
+      "Telecom (minor/rooftop)"
+    ],
+    "consent_uses": [
+      "Cemeteries",
+      "Cultural/social ceremonies",
+      "Telecom (freestanding/rooftop)",
+      "Wind turbine infrastructure",
+      "Tourist/environmental facilities",
+      "Urban agriculture",
+      "Informal trading",
+      "Harvesting of natural resources"
+    ],
+    "restrictions": [
+      "SDP governs development",
+      "City approval needed for construction/deposit of materials",
+      "City approval needed for air/underground rights"
+    ],
+    "recommended_actions": [
+      "Confirm if land is designated public",
+      "Protect public access",
+      "Consult Parks Dept",
+      "Demarcate informal trading per by-law"
+    ]
+  },
+  "OS3": {
+    "description": "Open Space 3 – Special open space",
+    "permitted_uses": [
+      "Open space",
+      "Private road",
+      "Environmental conservation use",
+      "Minor telecom (rooftop/freestanding)"
+    ],
+    "consent_uses": [
+      "Environmental facilities",
+      "Tourist facilities",
+      "Place of instruction/assembly/entertainment",
+      "Plant nursery",
+      "Utility service",
+      "Cemetery",
+      "Telecom (rooftop/freestanding)",
+      "Wind turbine infrastructure",
+      "Cultural/social ceremonies",
+      "Urban agriculture",
+      "Informal trading",
+      "Harvesting of natural resources"
+    ],
+    "restrictions": [
+      "SDP governs both primary (if required) and consent uses",
+      "City may only approve consent uses if they don't compromise open-space purpose"
+    ],
+    "recommended_actions": [
+      "For golf courses/parklands, fix access, lighting, and noise controls",
+      "Confirm heritage/environmental overlays"
+    ]
+  },
+  "AG": {
+    "description": "Agricultural",
+    "permitted_uses": [
+      "Agriculture",
+      "Intensive horticulture",
+      "Dwelling house",
+      "Riding stables",
+      "Environmental conservation/facilities",
+      "Telecom (rooftop/minor/freestanding)",
+      "Second dwelling",
+      "Home occupation/B&B/home child care"
+    ],
+    "consent_uses": [
+      "Additional dwelling units",
+      "Guest/holiday accommodation (guest house/hotel/tourist accommodation/facilities)",
+      "Intensive animal farming",
+      "Harvesting of natural resources",
+      "Mine",
+      "Utility service",
+      "Freestanding telecom",
+      "Wind turbine infrastructure",
+      "Aquaculture",
+      "Animal care centre",
+      "Farm shop",
+      "Renewable energy structure",
+      "Veterinary practice",
+      "Agricultural industry"
+    ],
+    "restrictions": [
+      "Total floor space of all dwelling units ≤1 500 m²",
+      "Farm shop ≤100 m²",
+      "Building lines per Item 109",
+      "Height: dwelling 9 m to wallplate / 11 m top of roof",
+      "Agri buildings ≤12 m",
+      "Minimum subdivision size and parking per Item 109"
+    ],
+    "recommended_actions": [
+      "Confirm Agricultural Use Zone overlays",
+      "Require motivation that consent uses are integral to farming",
+      "Secure right of access and water/servitude constraints"
+    ]
+  },
+  "RU": {
+    "description": "Rural (Smallholding)",
+    "permitted_uses": [
+      "Primary/consent uses & rules not fully extracted here (see Items 112–116)"
+    ],
+    "consent_uses": [],
+    "restrictions": [
+      "Refer to Items 112–116 incl. minimum subdivision size (Item 114)"
+    ],
+    "recommended_actions": [
+      "Check peri‑urban activity compatibility and access to services",
+      "Confirm min. subdivision and agriculture‑supportive uses"
+    ]
+  },
+  "LU": {
+    "description": "Limited Use (Transitional)",
+    "permitted_uses": [
+      "Restricts development to existing lawful uses (transitional from 'Undetermined')"
+    ],
+    "consent_uses": [],
+    "restrictions": [
+      "Development is limited",
+      "Rezoning needed for new uses"
+    ],
+    "recommended_actions": [
+      "Audit existing lawful rights carefully",
+      "Advise client to rezone for any change of use"
+    ]
+  }
+}

@@ -110,63 +110,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Search for ERF in the GeoJSON data
-            const erfResult = zoomToErf(erfNumber);
-            
-            if (erfResult) {
-                // Get zoning information from the feature
-                const feature = erfResult.feature;
-                const zoneType = feature.properties.INT_ZONE_CODE.toLowerCase();
-                const zoneDesc = feature.properties.INT_ZONE_DESC;
-                
-                // Create a data object similar to what the server would return
-                const data = {
-                    success: true,
-                    location: {
-                        lat: erfResult.lat,
-                        lng: erfResult.lng
-                    },
-                    erf_number: erfNumber,
-                    zoning_type: zoneType,
-                    zoning_info: {
-                        description: zoneDesc,
-                        permitted_uses: getPermittedUsesForZone(zoneType),
-                        restrictions: getRestrictionsForZone(zoneType)
+            // Send request to server for ERF lookup
+            fetch('/get_information', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ erf: erfNumber })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update map marker with returned location
+                    if (data.location) {
+                        updateMapMarker([data.location.lat, data.location.lng]);
                     }
-                };
-                
-                // Display information
-                displayInformation(data);
-            } else {
-                showError(`ERF number ${erfNumber} not found in the zoning data.`);
-            }
+                    
+                    // Display information
+                    displayInformation(data);
+                } else {
+                    showError(data.error || 'An error occurred while fetching ERF information.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showError('An error occurred while fetching ERF information.');
+            });
         }
     });
     
     // Helper function to get permitted uses for a zone type
     function getPermittedUsesForZone(zoneType) {
-        // This is a simplified version - in a real app, this would come from a database
-        const zoneUses = {
-            'sr1': ["Single-family homes", "Home occupation (with restrictions)", "Second dwelling (with restrictions)"],
-            'gr2': ["Multi-family dwellings", "Townhouses", "Flats", "Residential buildings"],
-            'tr2': ["Public roads", "Public parking", "Transport facilities"],
-            'os3': ["Special open space", "Environmental conservation", "Cultural and historical sites"]
-        };
-        
-        return zoneUses[zoneType] || ["Information not available"];
+        // This function is now handled by the server-side zoning data
+        // Return fallback if needed
+        return ["Information not available"];
     }
     
     // Helper function to get restrictions for a zone type
     function getRestrictionsForZone(zoneType) {
-        // This is a simplified version - in a real app, this would come from a database
-        const zoneRestrictions = {
-            'sr1': ["Height limit: 2-3 stories", "Setback: 3-5m from street", "Coverage: 60% max"],
-            'gr2': ["Height limit: 4-5 stories", "Setback: 4.5m from street", "Coverage: 60% max"],
-            'tr2': ["Special restrictions apply", "Contact municipality for details"],
-            'os3': ["Development restrictions apply", "Environmental impact assessment required", "Heritage approval may be required"]
-        };
-        
-        return zoneRestrictions[zoneType] || ["Information not available"];
+        // This function is now handled by the server-side zoning data
+        // Return fallback if needed
+        return ["Information not available"];
     }
     
     // Display error message
@@ -267,13 +251,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 delay: 4500,
                 content: `
                     <div class="alert alert-info">
-                        <h5 class="mb-2">📋 Recommended Actions</h5>
-                        <ul class="mb-0">
-                            <li>Verify current zoning with City of Cape Town</li>
-                            <li>Review building line restrictions and setbacks</li>
-                            <li>Consult with town planner for development applications</li>
-                            <li>Check for any special conditions or overlays</li>
-                        </ul>
+                        <h5 class="mb-2">Recommended Actions</h5>
+                        ${zoningInfo.recommended_actions && zoningInfo.recommended_actions.length > 0 ? 
+                            '<ul class="mb-0">' + 
+                            zoningInfo.recommended_actions.map(action => `<li>${action}</li>`).join('') + 
+                            '</ul>' 
+                            : '<ul class="mb-0"><li>Verify current zoning with City of Cape Town</li><li>Review building line restrictions and setbacks</li><li>Consult with town planner for development applications</li><li>Check for any special conditions or overlays</li></ul>'}
                     </div>
                 `
             }
@@ -341,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <div class="value-metrics">
                 <div class="value-section uplifts">
-                    <div class="value-section-title">📈 Value Uplift Drivers</div>
+                    <div class="value-section-title">Value Uplift Drivers</div>
                     ${zoningIntelligence.value_uplifts.map(uplift => `
                         <div class="value-item">
                             <span class="value-driver">${uplift.driver}</span>
@@ -350,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     `).join('')}
                 </div>
                 <div class="value-section drags">
-                    <div class="value-section-title">📉 Investment Headwinds</div>
+                    <div class="value-section-title">Investment Headwinds</div>
                     ${zoningIntelligence.value_drags.map(drag => `
                         <div class="value-item">
                             <span class="value-driver">${drag.risk}</span>

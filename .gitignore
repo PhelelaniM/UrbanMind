@@ -55,3 +55,4 @@ credentials.json
 *_token.*
 config.ini
 secrets.yaml
+.vercel
